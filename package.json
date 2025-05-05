@@ -1,18 +1,17 @@
 {
-    "name": "conflictura",
-    "preductname": "Conflictura Launcher",
-    "version": "3.2.6",
-    "description": "Conflictura modded server launcher",
+    "name": "eclozionmc",
+    "preductname": "EclozionMC Launcher",
+    "version": "1.0.1",
+    "description": "EclozionMC modded server launcher",
     "main": "src/app.js",
-    "author": "Riptiaz/Boulldogo/Vexato/Luuxis",
-    "env": "azuriom",
-    "settings": "https://conflictura.eu",
+    "author": "NeXoS_20, Riptiaz/Boulldogo/Vexato/Luuxis",
+    "env": "panel",
+    "settings": "https://azurelab.netlib.re/launcher",
     "scripts": {
-        "start": "cross-env-shell NODE_ENV=dev electron .",
+        "start": "cross-env-shell NODE_ENV=dev electron . --trace-warnings",
         "build": "node build.js --obf=true --build=platform",
         "dev": "cross-env-shell DEV_TOOL=open nodemon --exec npm start",
-        "icon": "node build.js --icon=https://raw.githubusercontent.com/CentralCorp/CentralCorp-Launcher/master/src/assets/images/icon.png"
-
+        "icon": "node build.js --icon=https://eclozion-mc.fr/storage/img/icon.png"
     },
     "license": "CC0",
     "nodemonConfig": {
@@ -24,19 +23,20 @@
         "https": "^1.0.0",
         "minecraft-java-core-azbetter": "^4.1.0",
         "node-fetch": "^2.6.7",
+        "open": "^10.1.2",
         "xml-js": "^1.6.11"
     },
     "devDependencies": {
         "cross-env": "^7.0.3",
         "electron": "^30.0.9",
         "electron-builder": "^26.0.12",
-        "nodemon": "^3.1.9",
-        "png2icons": "^2.0.1",
         "javascript-obfuscator": "^4.1.0",
-        "jimp": "^0.22.12"
+        "jimp": "^0.22.12",
+        "nodemon": "^3.1.9",
+        "png2icons": "^2.0.1"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Riptiaz/CentralCorp-Launcher.git"
+        "url": "git+https://github.com/azuryonoff/EclozionMC-Launcher.git"
     }
 }

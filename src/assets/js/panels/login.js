@@ -48,7 +48,7 @@ class Login {
         const account = (await this.database.get(uuid.selected, 'accounts')).value;
 
         document.querySelector('.player-skin-title').innerHTML = `${t('skin_of')} ${account.name}`;
-        document.querySelector('.skin-renderer-settings').src = `${websiteUrl}skin3d/3d-api/skin-api/${account.name}`;
+        document.querySelector('.skin-renderer-settings').src = `${websiteUrl}skin3d/3d-api/skin-api/${account.name}.png`;
     }
 
     async initOthers() {
@@ -91,7 +91,7 @@ class Login {
             playBtn.style.boxShadow = "none";
             playBtn.textContent = t('unavailable');
         } else {
-            playBtn.style.backgroundColor = "#00bd7a";
+            playBtn.style.backgroundColor = "#f8b704";
             playBtn.style.pointerEvents = "auto";
             playBtn.style.boxShadow = "2px 2px 5px rgba(0, 0, 0, 0.3)";
             playBtn.textContent = t('play');

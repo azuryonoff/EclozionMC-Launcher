@@ -21,6 +21,24 @@ img {
     user-select: none;
 }
 
+.txt-title {
+    font: 20px Poppins;
+    letter-spacing: 0px;
+    color: #E1E1E1;
+    display: flex;
+    position: absolute;
+    text-decoration: none;
+    max-width: calc(100% - 158px);
+    font-weight: 600;
+    font-size: 15px;
+    left: 10px;
+    transform: translate(0, -50%);
+    overflow: hidden;
+    align-items: center;
+    transition: color .2s;
+    padding-bottom: 5px;
+}
+
 .dragbar {
     position: fixed;
     background: #00000080;
@@ -30,7 +48,9 @@ img {
     height: 26px;
     -webkit-app-region: drag;
     z-index: 11;
-    display: none;
+    display: flex; /* Utilise flexbox pour aligner les éléments facilement */
+    align-items: center; /* Centrage vertical */
+    padding-left: 5px; /* Déplace le titre un peu plus à gauche */
 }
 
 .frame {

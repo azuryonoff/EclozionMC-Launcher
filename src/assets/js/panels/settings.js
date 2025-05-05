@@ -14,6 +14,7 @@ const fs = require('fs');
 const pkg = require('../package.json');
 const { ipcRenderer, shell } = require('electron');
 const settings_url = pkg.user ? `${pkg.settings}/${pkg.user}` : pkg.settings;
+const { exec } = require('child_process');
 
 class Settings {
     static id = "settings";
@@ -28,11 +29,10 @@ class Settings {
         this.initLauncherSettings();
         this.updateModsConfig();
         this.initOptionalMods();
-        this.headplayer();
-
+        this.headplayer(); 
 
         document.getElementById('uploadSkinButton').addEventListener('click', async () => {
-            await this.selectFile();
+            exec('start https://eclozion-mc.fr/skin-api');
         });
     }
 
@@ -41,7 +41,6 @@ class Settings {
         document.querySelector('.player-monnaie').innerHTML = '';
         await this.initOthers();
         await this.initPreviewSkin();
-        await this.updateAccountImage();
     }
 
     async headplayer() {
@@ -52,25 +51,6 @@ class Settings {
         const timestamp = new Date().getTime();
         const skin_url = `${azauth}api/skin-api/avatars/face/${pseudo}/?t=${timestamp}`;
         document.querySelector(".player-head").style.backgroundImage = `url(${skin_url})`;
-    }
-
-    async updateAccountImage() {
-        const uuid = (await this.database.get('1234', 'accounts-selected')).value;
-        const account = (await this.database.get(uuid.selected, 'accounts')).value;
-        const azauth = this.getAzAuthUrl();
-        const timestamp = new Date().getTime();
-
-        const accountDiv = document.getElementById(account.uuid);
-        if (accountDiv) {
-            const accountImage = accountDiv.querySelector('.account-image');
-            if (accountImage) {
-                accountImage.src = `${azauth}api/skin-api/avatars/face/${account.name}/?t=${timestamp}`;
-            } else {
-                console.error('Image not found in the selected account div.');
-            }
-        } else {
-            console.error(`No div found with UUID: ${account.uuid}`);
-        }
     }
 
     async initOthers() {
@@ -113,7 +93,7 @@ class Settings {
             playBtn.style.boxShadow = "none";
             playBtn.textContent = t('unavailable');
         } else {
-            playBtn.style.backgroundColor = "#00bd7a";
+            playBtn.style.backgroundColor = "#f8b704";
             playBtn.style.pointerEvents = "auto";
             playBtn.style.boxShadow = "2px 2px 5px rgba(0, 0, 0, 0.3)";
             playBtn.textContent = t('play');
@@ -326,7 +306,6 @@ class Settings {
 
             modElement.innerHTML = `
                 <div class="mods-container">
-                  ${modLink ? `<img src="${modLink}" class="mods-icon" alt="${modName} logo">` : ''}
                   <div class="mods-container-text">
                     <div class="mods-container-name">                    
                         <h2>${modName}</h2>
@@ -409,7 +388,7 @@ class Settings {
         formData.append('skin', file);
         const xhr = new XMLHttpRequest();
 
-        xhr.open('POST', `${azauth}api/skin-api/skins/update`, true);
+        xhr.open('POST', `${azauth}skin3d/3d-api/skin-api/update`, true);
 
         xhr.onload = async () => {
             console.log(`XHR Response: ${xhr.response}`);
@@ -440,7 +419,7 @@ class Settings {
 
         const skin = document.querySelector('.skin-renderer-settings');
         const cacheBuster = new Date().getTime();
-        const url = `${azauth}skin3d/3d-api/skin-api/${account.name}`;
+        const url = `${azauth}skin3d/3d-api/skin-api/${account.name}.png`;
         skin.src = url;
     }
 
@@ -557,9 +536,8 @@ class Settings {
         document.getElementById('open-launcher-text').textContent = t('open_launcher');
         document.getElementById('mods-title').textContent = t('optional_mods');
         document.getElementById('mods-info').innerHTML = t('mods_detailed_info');
-        document.getElementById('skin-title').textContent = t('skin');
-        document.getElementById('uploadSkinButton').textContent = t('change_skin');
-    }
+        document.getElementById('skin-title').textContent = t('skin')
+        }
 
     async initSettingsDefault() {
         if (!(await this.database.getAll('accounts-selected')).length) {

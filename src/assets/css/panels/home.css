@@ -1,10 +1,9 @@
 .bottom-bar-home {
     position: fixed;
-    bottom: 0;
+    bottom: 5px;
     width: 100%;
     height: 70px;
-    border-top-left-radius: 40px;
-    border-top-right-radius: 40px;
+    border-radius: 40px;
     background: #00000080;
     display: flex;
 }
@@ -151,11 +150,11 @@
     height: 37px;
     border-radius: 20px;
     border: none;
-    background: #00bd7a;
+    background: #f8b704;
     font: normal normal bold 20px/25px Poppins;
     color: #121212;
     margin: 15px 0;
-    box-shadow: 0 0 5px #00bd7a;
+    box-shadow: 0 0 5px #f8b704;
     cursor: pointer;
 }
 
@@ -186,7 +185,7 @@
 }
 
 .progress-bar::-webkit-progress-value {
-    background-color: #00bd7a;
+    background-color: #f8b704;
     border-radius: 10px;
 }
 
